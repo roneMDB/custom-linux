@@ -1,9 +1,10 @@
+# Récupération du répertoire du script
+REPOENV="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # load conf -- TODO ajouter exemple de conf dans README
-if [ -f /home/elb/tools-linux/.conf ]; then
-  . /home/elb/tools-linux/.conf
+if [ -f $REPOENV/.conf ]; then
+  . $REPOENV/.conf
 fi
-
 
 if [ -f ${REPOENV}/shell/colors.sh ]; then
   . $REPOENV/shell/colors.sh

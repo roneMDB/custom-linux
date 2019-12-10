@@ -176,6 +176,14 @@ wgetlistdir () {
   if [ $# -eq 1 ]
   then
     wget --user $TOOLS_PSB_NAME --password $TOOLS_PSB_PASSWORD  -d -r -np -N --spider -e robots=off --no-check-certificate "$1" 2>&1 | grep " -> " | grep -Ev "\/\?C=" | sed "s/.* -> //" | grep -E "^https" | grep -Ev "\/\.\.\/"
+    if [ -d $SEEDBOX_HOST_NAME ]
+    then
+      rm -R $SEEDBOX_HOST_NAME
+      if [ $? -ne 0 ]
+      then
+        echo "DELETE $SEEDBOX_HOST_NAME KO"
+      fi
+    fi
   else
     echo "ERROR : bad parameters"
     echo "USAGE : $0 <http link directory>"
@@ -184,7 +192,7 @@ wgetlistdir () {
 
 #use color.list
 color.list () {
-  grep "export " $REPOENV/colors.sh | cut -c8- | grep -v "Cara_" | cut -d'=' -f1 | while read -r line ; do
+  grep "export " $REPOENV/shell/colors.sh | cut -c8- | grep -v "Cara_" | cut -d'=' -f1 | while read -r line ; do
     local LINE_COLOR="printf \"\${$line}$line\${Color_Off}\""
     eval $LINE_COLOR
     echo
@@ -278,13 +286,13 @@ done
 
 #use tools (this command)
 tools () {
-    PATHTOOLS="$REPOENV/tools.sh"
+    PATHTOOLS="$REPOENV/shell/tools.sh"
     HELPTOOLS=$(grep ^#use $PATHTOOLS | cut -c6-)
     printf "${IYellow}$HELPTOOLS${Color_Off}\n"
     unset PATHTOOLS
     unset HELPTOOLS
 }
 
-# if [ $(basename "/$SHELL") == "zsh" ]; then
-#     printf "${Blue}$(basename $0) load!${Color_off}\n"
-# fi
+if [ $(basename "/$SHELL") == "zsh" ]; then
+    printf "${Blue}$(basename $0)  load!${Color_off}\n"
+fi
