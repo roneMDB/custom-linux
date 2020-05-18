@@ -19,14 +19,6 @@ alias ....='cd ../..'
 
 alias tools.cd='cd $REPOENV'
 
-if [ $(basename "/$SHELL") == "zsh" ]; then
-	alias edit.bashrc='$EDITOR ~/.bashrc'
-fi
-
-if [ $(basename "/$SHELL") == "zsh" ]; then
-	alias edit.zshrc='$EDITOR ~/.zshrc'
-fi
-
 
 # Autres
 alias h='history | tail -50'
@@ -86,7 +78,6 @@ alias tools.alias.list='cat $REPOENV/shell/alias.sh | grep -i "^alias" | cut -c7
 alias tools.meteo.auray='curl -4 http://wttr.in/Auray'
 alias tools.meteo.vannes='curl -4 http://wttr.in/Vannes'
 alias tools.meteo='meteo.vannes'
-alias tools.pwd.pp='presse-papier "$PWD"'
 
 alias tools.dayofyear='date +%j'
 
@@ -107,9 +98,3 @@ alias netstat.tools='sudo netstat -tulpn'
 # $TOOLS_SERVER_HOST
 # alias ssh.ds218plus.tunelSSH='ssh -L 27018:localhost:27017 -L 61208:localhost:61208 -L 8181:localhost:8181 -L 8010:localhost:8010 -L 32400:localhost:32400 erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT -X'
 alias ssh.ds218plus='ssh erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT'
-
-if [ $(basename "/$SHELL") == "zsh" ]; then
-	printf "${Blue}$(basename $0)  load!${Color_off}\n"
-fi
-
-

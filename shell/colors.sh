@@ -96,7 +96,3 @@ export Cara_cross="✝"
 export Cara_herefore="∴"
 export Cara_star="∗"
 export Cara_clown="🤡"
-
-if [ $(basename "/$SHELL") == "zsh" ]; then
-    printf "${Blue}$(basename $0) load!${Color_off}\n"
-fi

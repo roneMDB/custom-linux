@@ -25,8 +25,8 @@ extract () {
     fi
 }
 
-#use tools.backup
-tools.backup () {
+#use tools_backup
+tools_backup () {
   SAVE_DIR=$REPOENV/save/$(date +%Y%m%d)
   printf "${Yellow}Faire l'export dans ${BYellow}'$HOME/travail'${Yellow} de :\n"
   printf " ${Cara_sharp} ${BIYellow}Kantu${Yellow} (kantu_backup.zip)\n"
@@ -106,8 +106,8 @@ tools.backup () {
   unset SAVE_DIR
 }
 
-#use presse-papier <chaîne à copier>
-presse-papier () {
+#use presse_papier <chaîne à copier>
+presse_papier () {
     if [ $# -eq 1 ]
     then
         xsel -cb
@@ -121,25 +121,26 @@ presse-papier () {
     fi
 }
 
-#use iban.to.clipboard
-iban.to.clipboard () {
+#use iban_to_clipboard
+iban_to_clipboard () {
     $HOME/tools-linux/function/iban.sh
 }
 
-#use siret.to.clipboard
-siret.to.clipboard () {
+#use siret_to_clipboard
+siret_to_clipboard () {
     $HOME/tools-linux/function/siret.sh
 }
 
-#use repeat.cmd "<sleep in second>" "<command>"
+#use repeat_cmd "<sleep in second>" "<command>"
 #possible d'utiliser watch aussi (exemple : watch -n 2 ls -l)
-repeat.cmd () {
+repeat_cmd () {
     if [ $# -eq 2 ]
     then
         printf "${Red} ${Cara_gimel} Il est aussi possible d'utiliser watch (exemple : watch -n 2 ls -l)\n${Color_Off}"
         REPEAT_COMMAND='printf "${BCyan}\n${Cara_puce} time (every $1 sec.) ${Cara_fleche} "; eval echo "$(date +'%H:%M:%S:%N' | cut -b1-13)"; printf "${Cara_puce} cmd ${Cara_fleche} $2${Color_Off}"; echo "\n"; eval $2 ; sleep $1;'
-        while (( 1 == 1 )) { eval $REPEAT_COMMAND }
-        
+        while (( 1 == 1 )) do 
+          eval $REPEAT_COMMAND 
+        done
     else
         printf "${Cara_failed} ERROR \t:\tbad parameters !\n"
         echo "USAGE \t:\t$0 \"<second>\" \"<command>\""
@@ -190,8 +191,8 @@ wgetlistdir () {
   fi
 }
 
-#use color.list
-color.list () {
+#use color_list
+color_list () {
   grep "export " $REPOENV/shell/colors.sh | cut -c8- | grep -v "Cara_" | cut -d'=' -f1 | while read -r line ; do
     local LINE_COLOR="printf \"\${$line}$line\${Color_Off}\""
     eval $LINE_COLOR
@@ -200,7 +201,7 @@ color.list () {
   done
 }
 
-git.count.author () {
+git_count_author () {
   if [ -d ".git" ] 
   then
     if [ $# -eq 1 ]
@@ -215,12 +216,13 @@ git.count.author () {
   fi
 }
 
-git.count.line () {
+git_count_line () {
   if [ -d ".git" ] 
   then
     for line in $(git shortlog -sn)
     do
-      if [[ "$line" != [0-9]* ]] then
+      if [[ "$line" != [0-9]* ]] 
+      then
         echo "$line"
         git log --author="${line}" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -
         echo
@@ -231,17 +233,17 @@ git.count.line () {
   fi
 }
 
-# usage youtube.dl.playlist "Playlist pour Repas" "https://www.youtube.com/playlist?list=PL61mcSGXKTQozh7uy0v58bv1bOS2st4I7"
+# usage youtube_dl_playlist "Playlist pour Repas" "https://www.youtube.com/playlist?list=PL61mcSGXKTQozh7uy0v58bv1bOS2st4I7"
 # Favoriser l'instalation de youtube-dl via pip plutot que apt-get"
-youtube.dl.playlist () {
+youtube_dl_playlist () {
     if [ $# -eq 2 ]
     then
         TITRE_PLAYLIST=$1
         echo $TITRE_PLAYLIST
         mkdir $TITRE_PLAYLIST
         if [ $? -ne 0 ]; then
-          printf "${Cara_failed} ERROR \t:\tyoutube.dl.playlist failed !\n"
-          echo "ERROR  youtube.dl.playlist failed "
+          printf "${Cara_failed} ERROR \t:\tyoutube_dl_playlist failed !\n"
+          echo "ERROR  youtube_dl_playlist failed "
           exit 1
         fi
         cd $TITRE_PLAYLIST
@@ -250,11 +252,6 @@ youtube.dl.playlist () {
         #echo "nohup youtube-dl -i --extract-audio --audio-format mp3 -o $2" 
         #echo "$2" > test.txt
     fi
-}
-
-#use bip
-function bip() {
-  echo -ne '\007'
 }
 
 # generate alias which open vscode with link in jump directory
@@ -292,7 +289,3 @@ tools () {
     unset PATHTOOLS
     unset HELPTOOLS
 }
-
-if [ $(basename "/$SHELL") == "zsh" ]; then
-    printf "${Blue}$(basename $0)  load!${Color_off}\n"
-fi
