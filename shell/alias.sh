@@ -11,6 +11,7 @@ fi
 alias la='ls -lha'
 alias ll='ls -alrth'
 alias lt='ls -lrth'
+alias l1='ls -1'
 alias p="pwd"
 alias l='ls -lh'
 # alias dir='ls -ahl | grep ^d'
@@ -77,7 +78,7 @@ alias tools.edit.gitconfig='$EDITOR ~/.gitconfig'
 alias tools.alias.list='cat $REPOENV/shell/alias.sh | grep -i "^alias" | cut -c7- | cut -d"=" -f1'
 alias tools.meteo.auray='curl -4 http://wttr.in/Auray'
 alias tools.meteo.vannes='curl -4 http://wttr.in/Vannes'
-alias tools.meteo='meteo.vannes'
+alias tools.meteo='tools.meteo.auray'
 
 alias tools.dayofyear='date +%j'
 
@@ -97,4 +98,12 @@ alias netstat.tools='sudo netstat -tulpn'
 
 # $TOOLS_SERVER_HOST
 # alias ssh.ds218plus.tunelSSH='ssh -L 27018:localhost:27017 -L 61208:localhost:61208 -L 8181:localhost:8181 -L 8010:localhost:8010 -L 32400:localhost:32400 erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT -X'
-alias ssh.ds218plus='ssh erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT'
+# alias ssh.ds218plus='ssh erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT'
+
+if [ -n "$ZSH_VERSION" ]; then
+    # open ~/.zshrc in using the default editor specified in $EDITOR
+    alias ec="$EDITOR $HOME/.zshrc"
+
+    # source ~/.zshrc
+    alias sc="source $HOME/.zshrc"
+fi
