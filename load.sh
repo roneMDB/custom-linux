@@ -1,9 +1,9 @@
 # Récupération du répertoire du script
-REPOENV="$( cd "$(dirname "$0")" ; pwd -P )"
+REPOENV=$(dirname "$(readlink -f "$0")")
 
 # load conf -- TODO ajouter exemple de conf dans README
 if [ -f $REPOENV/.conf ]; then
-  . $REPOENV/.conf
+  source $REPOENV/.conf
 fi
 
 if [ -f ${REPOENV}/shell/colors.sh ]; then
@@ -17,3 +17,10 @@ fi
 if [ -f $REPOENV/shell/tools.sh ]; then
   . $REPOENV/shell/tools.sh
 fi
+
+# Custom aliases and functions specific to this machine
+if [ -f $REPOENV/shell/specific.sh ]; then
+  . $REPOENV/shell/specific.sh
+fi
+
+printf "${Green}custom-linux loaded ${Cara_check}${Color_Off}\n"

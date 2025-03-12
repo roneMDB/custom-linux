@@ -1,1 +1,3 @@
 .conf
+shell/specific.sh
+node_modules

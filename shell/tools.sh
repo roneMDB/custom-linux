@@ -1,3 +1,13 @@
+# ! TODO 
+#use tools (this command)
+# TODO A REVOIR CAR CUSTOM-LINUX et non TOOLS-CODE
+# tools () {
+#     PATHTOOLS="$REPOENV/shell/tools.sh"
+#     HELPTOOLS=$(grep ^#use $PATHTOOLS | cut -c6-)
+#     printf "${IYellow}$HELPTOOLS${Color_Off}\n"
+#     unset PATHTOOLS
+#     unset HELPTOOLS
+# }
 
 #use extract
 extract () {
@@ -26,18 +36,20 @@ extract () {
 }
 
 #use presse_papier <chaîne à copier>
+# Utiliser "command | xclip -selection clipboard"
 presse_papier () {
-    if [ $# -eq 1 ]
-    then
-        xsel -cb
-        echo -n "$1" | xsel -ib
-        printf "${IGreen}Copied to clipboard ${Cara_check}${Color_Off}\n"
-        printf "${IYellow}$(xsel --clipboard)${Color_Off}\n"
-    else
-        printf "${Cara_failed} ERROR \t:\tbad parameters !\n"
-        echo "USAGE \t:\t$0 \"<string>\""
-        echo "EXEMPLE :\t$0 \"My string to clipboard\""
-    fi
+  echo "Utiliser 'command | xclip -selection clipboard'"
+    # if [ $# -eq 1 ]
+    # then
+    #     xsel -cb
+    #     echo -n "$1" | xsel -ib
+    #     printf "${IGreen}Copied to clipboard ${Cara_check}${Color_Off}\n"
+    #     printf "${IYellow}$(xsel --clipboard)${Color_Off}\n"
+    # else
+    #     printf "${Cara_failed} ERROR \t:\tbad parameters !\n"
+    #     echo "USAGE \t:\t$0 \"<string>\""
+    #     echo "EXEMPLE :\t$0 \"My string to clipboard\""
+    # fi
 }
 
 #use repeat_cmd "<sleep in second>" "<command>"
@@ -112,24 +124,24 @@ color_list () {
 
 # usage youtube_dl_playlist "Playlist pour Repas" "https://www.youtube.com/playlist?list=PL61mcSGXKTQozh7uy0v58bv1bOS2st4I7"
 # Favoriser l'instalation de youtube-dl via pip plutot que apt-get"
-youtube_dl_playlist () {
-    if [ $# -eq 2 ]
-    then
-        TITRE_PLAYLIST=$1
-        echo $TITRE_PLAYLIST
-        mkdir $TITRE_PLAYLIST
-        if [ $? -ne 0 ]; then
-          printf "${Cara_failed} ERROR \t:\tyoutube_dl_playlist failed !\n"
-          echo "ERROR  youtube_dl_playlist failed "
-          exit 1
-        fi
-        cd $TITRE_PLAYLIST
-        youtube-dl -i --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$2"
-        cd ..
-        #echo "nohup youtube-dl -i --extract-audio --audio-format mp3 -o $2" 
-        #echo "$2" > test.txt
-    fi
-}
+# youtube_dl_playlist () {
+#     if [ $# -eq 2 ]
+#     then
+#         TITRE_PLAYLIST=$1
+#         echo $TITRE_PLAYLIST
+#         mkdir $TITRE_PLAYLIST
+#         if [ $? -ne 0 ]; then
+#           printf "${Cara_failed} ERROR \t:\tyoutube_dl_playlist failed !\n"
+#           echo "ERROR  youtube_dl_playlist failed "
+#           exit 1
+#         fi
+#         cd $TITRE_PLAYLIST
+#         youtube-dl -i --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s" "$2"
+#         cd ..
+#         #echo "nohup youtube-dl -i --extract-audio --audio-format mp3 -o $2" 
+#         #echo "$2" > test.txt
+#     fi
+# }
 
 # generate alias which open vscode with link in jump directory
 for link in $MARKPATH/*(@)
@@ -158,12 +170,3 @@ done
 #     echo "RETOUR = $RETOUR"
 #  }
 
-#use tools (this command)
-# TODO A REVOIR CAR CUSTOM-LINUX et non TOOLS-CODE
-# tools () {
-#     PATHTOOLS="$REPOENV/shell/tools.sh"
-#     HELPTOOLS=$(grep ^#use $PATHTOOLS | cut -c6-)
-#     printf "${IYellow}$HELPTOOLS${Color_Off}\n"
-#     unset PATHTOOLS
-#     unset HELPTOOLS
-# }

@@ -1,26 +1,31 @@
-curl
-xsel
-vim
-git
-tree
-less
-aptitude
-unzip
-colordiff
 htop
-unzip
-guake
-at
-pydf
-notify-send
-w3m
-mc
-xclip
-#youtube-dl use pip
-dialog
-qrencode
-rdesktop
-nethogs
+figlet
+toilet
 lolcat
-shellcheck
-trash-cli
+xclip
+
+
+# curl
+# xsel
+# vim
+# git
+# tree
+# less
+# aptitude
+# unzip
+# colordiff
+# unzip
+# guake
+# at
+# pydf
+# notify-send
+# w3m
+# mc
+# xclip
+# dialog
+# qrencode
+# rdesktop
+# nethogs
+# shellcheck
+# trash-cli
+#youtube-dl use pip

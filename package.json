@@ -1,0 +1,25 @@
+{
+  "name": "custom-linux",
+  "version": "0.1.0",
+  "description": "Custom linux",
+  "main": "index.js",
+  "bin": {
+    "scrapper-seedbox": "./nodejs/getSeedbox.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roneMDB/custom-linux.git"
+  },
+  "author": "elb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roneMDB/custom-linux/issues"
+  },
+  "homepage": "https://github.com/roneMDB/custom-linux#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
