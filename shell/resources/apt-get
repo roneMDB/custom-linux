@@ -29,3 +29,6 @@ xclip
 # shellcheck
 # trash-cli
 #youtube-dl use pip
+shellcheck
+trash-cli
+gdu # https://memo-linux.com/gdu-utilitaire-danalyse-despace-disque-sous-linux/

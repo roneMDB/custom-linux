@@ -83,16 +83,23 @@ alias system.encodage.terminal='echo $LC_CTYPE'
 
 alias tools.git.cheat='xdg-open "https://training.github.com/kit/downloads/fr/github-git-cheat-sheet.pdf" 2>/dev/null &'
 alias tools.edit.gitconfig='$EDITOR ~/.gitconfig'
-alias tools.alias.list='cat "$REPOENV/shell/alias.sh" | grep -i "^alias" | cut -c7- | cut -d"=" -f1'
-alias tools.meteo.auray='curl -4 http://wttr.in/Auray'
+alias tools.alias.list='cat $CUSTOM_LINUX_REPOENV/shell/alias.sh | grep -i "^alias" | cut -c7- | cut -d"=" -f1'
+alias tools.meteo.belz='curl -4 http://wttr.in/Belz'
 alias tools.meteo.vannes='curl -4 http://wttr.in/Vannes'
-alias tools.meteo='tools.meteo.auray'
+alias tools.meteo='tools.meteo.belz'
 
 alias tools.dayofyear='date +%j'
 
 alias tools.count.file='find . -maxdepth 1 -type d | cut -d/ -f2 | uniq -c | sort -rn'
 
-alias color.cara="grep \"export Cara_\" \"$REPOENV/shell/colors.sh\" | cut -c8-"
+alias color.cara="grep \"export Cara_\" $CUSTOM_LINUX_REPOENV/shell/colors.sh | cut -c8-"
+
+alias zsh_history_fix="${CUSTOM_LINUX_REPOENV}/shell/scripts/zsh_history_fix.sh"
+
+
+# https://github.com/Microsoft/WSL/issues/2466#issuecomment-370316815
+# https://www.it-connect.fr/afficher-une-notification-sur-windows-10-avec-powershell/
+alias notify-send='powershell.exe -command New-BurntToastNotification -Text Notification'
 
 # youtube-dl
 # youtube-dl.playlist <url to playlist>
@@ -107,6 +114,31 @@ alias color.cara="grep \"export Cara_\" \"$REPOENV/shell/colors.sh\" | cut -c8-"
 # $TOOLS_SERVER_HOST
 # alias ssh.ds218plus.tunelSSH='ssh -L 27018:localhost:27017 -L 61208:localhost:61208 -L 8181:localhost:8181 -L 8010:localhost:8010 -L 32400:localhost:32400 erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT -X'
 # alias ssh.ds218plus='ssh erwan@$TOOLS_SERVER_HOST -p $TOOLS_SERVER_PORT'
+
+
+# bartlib
+alias debout.start='bartib start -p "assis/debout" -d "debout"'
+alias debout.stop='bartib stop'
+alias debout.report='bartib report | tail -2 | head -1'
+alias debout.semaine='bartib report --current_week'
+alias debout.semaine.derniere='bartib report --last_week'
+alias debout.hier='bartib report --yesterday'
+alias debout.aujourdhui='bartib report --today | tail -2 | head -1 | cut -d" " -f2-'
+alias debout.resume='bartib list'
+
+
+
+##### A faire sur WSL 2
+# Rediriger la sortie d'une commande dans le presse-papier Windows
+# ex: cat ~/.ssh/id_rsa.pub | copy
+alias copy='clip.exe'
+
+# Permet d'ouvrir un fichier, un dossier ou une url dans Windows
+alias open="rundll32.exe url.dll,FileProtocolHandler"
+
+# Alias d'`open` pour des raisons de compatibilité
+alias xdg-open="open"
+##### Fin A faire sur WSL 2
 
 if [ -n "$ZSH_VERSION" ]; then
     # open ~/.zshrc in using the default editor specified in $EDITOR

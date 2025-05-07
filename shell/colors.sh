@@ -2,6 +2,8 @@
 
 # src : https://wiki.archlinux.org/index.php/Color_Bash_Prompt
 
+# Example : printf "${IGreen}Copied to clipboard ${Cara_check}${Color_Off}\n"
+
 # Reset
 export Color_Off='\e[0m'       # Text Reset
 

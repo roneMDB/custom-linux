@@ -97,7 +97,9 @@ allo () {
 wgetlistdir () {
   if [ $# -eq 1 ]
   then
-    wget --user $TOOLS_PSB_NAME --password $TOOLS_PSB_PASSWORD  -d -r -np -N --spider -e robots=off --no-check-certificate "$1" 2>&1 | grep " -> " | grep -Ev "\/\?C=" | sed "s/.* -> //" | grep -E "^https" | grep -Ev "\/\.\.\/"
+    WGET_RESULTS=$(wget --user $TOOLS_PSB_NAME --password $TOOLS_PSB_PASSWORD  -d -r -np -N --spider -e robots=off --no-check-certificate "$1" 2>&1 | grep " -> " | grep -Ev "\/\?C=" | sed "s/.* -> //" | grep -E "^https" | grep -Ev "\/$" | grep -Ev "\/\.\.\/")
+    echo ${WGET_RESULTS}
+    # echo ${WGET_RESULTS} | xclip -selection clipboard
     if [ -d $SEEDBOX_HOST_NAME ]
     then
       rm -R $SEEDBOX_HOST_NAME
@@ -114,7 +116,7 @@ wgetlistdir () {
 
 #use color_list
 color_list () {
-  grep "export " $REPOENV/shell/colors.sh | cut -c8- | grep -v "Cara_" | cut -d'=' -f1 | while read -r line ; do
+  grep "export " $CUSTOM_LINUX_REPOENV/shell/colors.sh | cut -c8- | grep -v "Cara_" | cut -d'=' -f1 | while read -r line ; do
     local LINE_COLOR="printf \"\${$line}$line\${Color_Off}\""
     eval $LINE_COLOR
     echo
@@ -170,3 +172,20 @@ done
 #     echo "RETOUR = $RETOUR"
 #  }
 
+#use tools (this command)
+# TODO A REVOIR CAR CUSTOM-LINUX et non TOOLS-CODE
+# tools () {
+#     PATHTOOLS="$CUSTOM_LINUX_REPOENV/shell/tools.sh"
+#     HELPTOOLS=$(grep ^#use $PATHTOOLS | cut -c6-)
+#     printf "${IYellow}$HELPTOOLS${Color_Off}\n"
+#     unset PATHTOOLS
+#     unset HELPTOOLS
+# }
+
+
+# https://github.com/nikolassv/bartib#getting-help
+export BARTIB_FILE="/home/lebideau-e/travail/repositories/tools-linux/temps_passés/2022.bartib"
+
+# WSL 2: Run Graphical Linux Desktop Applications from Windows 10 Bash Shell
+# https://stackoverflow.com/questions/61860208/wsl-2-run-graphical-linux-desktop-applications-from-windows-10-bash-shell-erro
+export DISPLAY=:0
